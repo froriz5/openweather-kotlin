@@ -2,6 +2,7 @@ package feliperoriz.openweather_kotlin
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,5 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textView.text = "Changed Hello World!"
+        button.setOnClickListener({ textView.text = "Button Clicked!" });
     }
+
+
 }
