@@ -32,5 +32,7 @@ proguard/
 captures/
 
 # Workspace Files
-/.idea/workspace.xml
-/.idea/libraries
+.idea/libraries
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/workspace.xml
