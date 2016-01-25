@@ -11,8 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textView.text = "Changed Hello World!"
-        button.setOnClickListener({ textView.text = "Button Clicked!" });
+        button.setOnClickListener(mButtonClicked)
     }
 
-
+    val mButtonClicked: View.OnClickListener = View.OnClickListener {
+        textView.text = "Button Clicked"
+    }
 }
