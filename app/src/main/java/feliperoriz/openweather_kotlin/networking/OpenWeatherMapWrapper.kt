@@ -15,7 +15,8 @@ import retrofit.client.Response
 import retrofit.converter.GsonConverter
 
 /**
- * Created by feliperoriz on 1/26/16.
+ * Wrapper for interacting with the Open Weather API.
+ * Created by Felipe Roriz on 1/26/16.
  */
 class OpenWeatherMapWrapper : OpenWeatherApiInterface {
 
@@ -46,26 +47,19 @@ class OpenWeatherMapWrapper : OpenWeatherApiInterface {
 
 
     override fun getOpenWeatherMapRoot(location: String, presenter: MainPresenter) {
-        openWeatherApi.getWeatherFromApi(location,
-                apiKey, unitType, WeatherCallback(location, presenter))
-    }
-
-    class WeatherCallback(var location: String, var presenter: MainPresenter) : Callback<OpenWeatherMapRoot> {
-
-        override fun success(root: OpenWeatherMapRoot, response: Response?) {
-            var weatherEntry : WeatherEntry?
-            if (root.statusCode != 404) {
-                weatherEntry = WeatherEntry().createWeatherEntry(location, root)
-                presenter.setWeatherData(weatherEntry)
+        openWeatherApi.getWeatherFromApi(location, apiKey, unitType, object: Callback<OpenWeatherMapRoot> {
+            override fun success(root: OpenWeatherMapRoot?, response: Response?) {
+                var weatherEntry : WeatherEntry?
+                if (root != null && root.statusCode != 404) {
+                    weatherEntry = WeatherEntry().createWeatherEntry(location, root)
+                    presenter.setWeatherData(weatherEntry)
+                }
             }
-        }
-
-        override fun failure(error: RetrofitError?) {
-            Log.d("WEATHER_WRAPPER_DEBUG", error.toString());
-        }
-
+            override fun failure(error: RetrofitError?) {
+                Log.d("WEATHER_WRAPPER_DEBUG", error.toString());
+            }
+        })
     }
-
 }
 
 
