@@ -54,9 +54,7 @@ class OpenWeatherMapWrapper : OpenWeatherApiInterface {
 
         override fun success(root: OpenWeatherMapRoot, response: Response?) {
             var weatherEntry : WeatherEntry?
-            if (root.statusCode == 404)
-                weatherEntry = null
-            else {
+            if (root.statusCode != 404) {
                 weatherEntry = WeatherEntry().createWeatherEntry(location, root)
                 presenter.setWeatherData(weatherEntry)
             }
