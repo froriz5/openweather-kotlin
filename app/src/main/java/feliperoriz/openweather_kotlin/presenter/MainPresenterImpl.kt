@@ -8,7 +8,7 @@ import feliperoriz.openweather_kotlin.view.MainView
  * Created by feliperoriz on 1/26/16.
  */
 class MainPresenterImpl: MainPresenter {
-    
+
     var view: MainView
     var wrapper: OpenWeatherMapWrapper
 
@@ -25,6 +25,7 @@ class MainPresenterImpl: MainPresenter {
         var weather: WeatherEntry
         if (weatherEntry == null) {
             weather = WeatherEntry("", 0.0, 0.0, 0.0, "")
+            weather.changeToString("")
             return weather
         }
         return weatherEntry
